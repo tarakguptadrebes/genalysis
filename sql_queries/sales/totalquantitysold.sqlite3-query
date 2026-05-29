@@ -1,0 +1,5 @@
+-- database: ../database/genalysis.db
+
+SELECT 
+    SUM(product_quantity) AS total_items_sold
+FROM order_items;

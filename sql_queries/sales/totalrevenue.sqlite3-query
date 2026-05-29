@@ -1,0 +1,10 @@
+-- database: ../database/genalysis.db
+
+SELECT 
+    SUM(
+        order_items.product_quantity *
+        CAST(REPLACE(products_2026.product_price_aud, 'AUD ', '') AS DECIMAL(10,2))
+    ) AS total_revenue
+FROM order_items
+JOIN products_2026
+    ON order_items.product_id = products_2026.product_id;
