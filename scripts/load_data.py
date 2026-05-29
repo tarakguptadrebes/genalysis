@@ -4,10 +4,18 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+db_folder = BASE_DIR / "database"
+db_folder.mkdir(parents=True, exist_ok=True)
+
 conn = sqlite3.connect(BASE_DIR / "database" / "genalysis.db")
 
 tables = {
-    "fake_dataset":"fake_dataset.csv"
+    "customers":"customers.csv",
+    "order_items":"order_items.csv",
+    "orders":"orders.csv",
+    "products_2026":"products_2026.csv",
+    "reviews":"reviews.csv",
+    "sellers_2026":"sellers_2026.csv"
 }
 
 for table_name,file in tables.items():
