@@ -1,4 +1,4 @@
--- database: ../../database/genalysis.db
+-- database: ../database/genalysis.db
 
 SELECT 
     seller_area, 
