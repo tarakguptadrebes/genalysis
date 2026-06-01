@@ -1,0 +1,14 @@
+-- database: ../database/genalysis.db
+
+SELECT 
+    s.seller_state,
+    SUM(oi.product_quantity * CAST(REPLACE(p.product_price_aud, 'AUD', '') AS DECIMAL(10,2))) AS revenue
+FROM order_items AS oi
+INNER JOIN products_2026 AS p
+    ON oi.product_id = p.product_id
+INNER JOIN sellers_2026 AS s
+    ON p.seller_id = s.seller_id
+GROUP BY s.seller_state
+
+
+
