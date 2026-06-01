@@ -1,0 +1,15 @@
+-- database: ../../database/genalysis.db
+
+SELECT 
+    products_2026.product_name,
+    products_2026.product_category,
+    SUM(order_items.product_quantity) AS total_sold
+FROM orders
+JOIN order_items
+    ON orders.order_id = order_items.order_id
+JOIN products_2026
+    ON order_items.product_id = products_2026.product_id
+WHERE strftime('%Y', orders.order_date) = '2025'
+GROUP BY products_2026.product_name, products_2026.product_category
+ORDER BY total_sold DESC
+LIMIT 10;
