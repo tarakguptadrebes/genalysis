@@ -1,3 +1,3 @@
 # Genalysis
 
-python -m scripts.load_data
+python main.py

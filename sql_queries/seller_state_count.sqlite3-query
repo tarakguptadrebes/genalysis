@@ -1,0 +1,8 @@
+-- database: ../database/genalysis.db
+
+SELECT 
+    seller_state,
+    COUNT(seller_id) AS seller_count
+FROM sellers_2026
+GROUP BY seller_state
+HAVING COUNT(seller_id) != 0

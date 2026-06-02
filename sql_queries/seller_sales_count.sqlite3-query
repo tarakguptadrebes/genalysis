@@ -1,8 +1,0 @@
--- database: ../database/genalysis.db
-
-SELECT 
-    DISTINCT seller_id,
-    COUNT(seller_id) AS sales
-FROM products_2026
-GROUP BY seller_id
-ORDER BY sales DESC

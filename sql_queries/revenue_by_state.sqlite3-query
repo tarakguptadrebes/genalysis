@@ -8,7 +8,10 @@ INNER JOIN products_2026 AS p
     ON oi.product_id = p.product_id
 INNER JOIN sellers_2026 AS s
     ON p.seller_id = s.seller_id
-GROUP BY s.seller_state
+GROUP BY s.seller_state;
+
+
+
 
 
 

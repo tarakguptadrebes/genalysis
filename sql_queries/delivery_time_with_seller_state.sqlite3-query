@@ -1,0 +1,13 @@
+-- database: ../database/genalysis.db
+
+SELECT 
+    o.order_id,
+    s.seller_state,
+    julianday(o.delivery_date)-julianday(o.order_date) AS delivery_time
+FROM orders AS o
+INNER JOIN order_items AS oi
+    ON o.order_id = oi.order_id
+INNER JOIN products_2026 AS p
+    ON oi.product_id = p.product_id
+INNER JOIN sellers_2026 AS s
+    ON p.seller_id = s.seller_id

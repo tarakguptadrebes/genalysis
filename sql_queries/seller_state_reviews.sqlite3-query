@@ -1,12 +1,14 @@
 -- database: ../database/genalysis.db
 
 SELECT 
-    p.seller_id,
+    s.seller_state,
     AVG(r.review_rating) as avg_rating
 FROM order_items AS o
 INNER JOIN reviews AS r
     ON o.order_id = r.order_id
 INNER JOIN products_2026 AS p
     ON o.product_id = p.product_id
-GROUP BY p.seller_id
+INNER JOIN sellers_2026 AS s
+    ON p.seller_id = s.seller_id
+GROUP BY s.seller_state
 ORDER BY avg_rating DESC

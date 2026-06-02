@@ -1,0 +1,31 @@
+-- database: ../database/genalysis.db
+
+WITH review_totals AS (
+    SELECT 
+        s.seller_state,
+        SUM(r.reason_review_product) AS sum_product,
+        SUM(r.reason_review_delivery) AS sum_delivery,
+        SUM(r.reason_review_price) AS sum_price,
+        SUM(r.reason_review_service) AS sum_service,
+        (SUM(r.reason_review_product)+
+        SUM(r.reason_review_delivery)+
+        SUM(r.reason_review_price)+
+        SUM(r.reason_review_service)) AS sum_all_reasons
+    FROM reviews AS r
+    INNER JOIN order_items AS oi
+        ON r.order_id = oi.order_id
+    INNER JOIN products_2026 AS p
+        ON oi.product_id = p.product_id
+    INNER JOIN sellers_2026 AS s
+        ON p.seller_id = s.seller_id
+    WHERE r.review_rating < 3
+    GROUP BY seller_state
+)
+
+SELECT
+    seller_state,
+    sum_product*100/NULLIF(sum_all_reasons, 0) AS product_pct,
+    sum_delivery*100/NULLIF(sum_all_reasons, 0) AS delivery_pct,
+    sum_price*100/NULLIF(sum_all_reasons, 0) AS price_pct,
+    sum_service*100/NULLIF(sum_all_reasons, 0) AS service_pct
+FROM review_totals;
