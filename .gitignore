@@ -222,3 +222,6 @@ __marimo__/
 
 # Folders
 output/
+
+# DS_Store
+.DS_Store
